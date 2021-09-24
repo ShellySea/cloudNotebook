@@ -2,7 +2,7 @@ const connectToMongo = require("./db");
 const express = require('express');
 connectToMongo();
 const app = express()
-const port = 3000
+const port = 5000
 
 //using middleware to access res.body in auth.js
 app.use(express.json())
