@@ -33,7 +33,6 @@ router.post('/addnote', fetchuser, [
             user: req.user.id
         });
         const savedNote = await note.save();
-        console.log(savedNote);
         res.json(savedNote);
     } catch (error) {
         console.log(err.message);
@@ -41,7 +40,7 @@ router.post('/addnote', fetchuser, [
     }
 })
 
-// ROUTE 3:Update notes: POST "/api/notes/updatenote". Login required
+// ROUTE 3:Update notes: PUT "/api/notes/updatenote". Login required
 router.put('/updatenote/:id', fetchuser, [
     body('title', 'Enter a valid email').isLength({ min: 3 }),
     body('description', 'Description must be atleast 5 characters').isLength({ min: 5 })
@@ -63,6 +62,7 @@ router.put('/updatenote/:id', fetchuser, [
         let note = await Note.findById(req.params.id);
         if (!note) { return res.status(404).send("Note not Found") }
 
+        // Allow updation only if user owns this note
         if (note.user.toString() !== req.user.id) {
             return res.status(401).send("Not Allowed to update");
         }
@@ -73,7 +73,27 @@ router.put('/updatenote/:id', fetchuser, [
         console.log(err.message);
         res.status(500).send({ error: 'Internal Server Error' })
     }
+})
 
+// ROUTE 4:Delete note: DELETE "/api/notes/deletenote". Login required
+
+router.delete('/deletenote/:id', fetchuser, async (req, res) => {
+    try {
+        // Find the note to be deleted and delete it
+        let note = await Note.findById(req.params.id);
+        if (!note) { return res.status(404).send("Note not Found") }
+
+        // Allow deletion only if user owns this note
+        if (note.user.toString() !== req.user.id) {
+            return res.status(401).send("Not Allowed to update");
+        }
+        note = await Note.findByIdAndDelete(req.params.id);
+        res.json({ "success": "Note has been deleted", note: note });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({ error: 'Internal Server Error' })
+    }
 })
 
 module.exports = router
+
