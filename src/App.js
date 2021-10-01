@@ -11,14 +11,16 @@ function App() {
       <NoteState>
         <Router>
           <Navbar appName='iNoteBook' />
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/about">
-              <About />
-            </Route>
-          </Switch>
+          <div className="container">
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route exact path="/about">
+                <About />
+              </Route>
+            </Switch>
+          </div>
         </Router>
       </NoteState>
     </div>
