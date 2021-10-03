@@ -53,14 +53,14 @@ const NoteState = (props) => {
     const [notes, setNotes] = useState(notesinitial);
 
     // Add a Note
-    const addNote = () => {
+    const addNote = (title, description, tag) => {
         console.log('Adding a new note')
         const note = {
             "_id": "6150ce9f44cfb6c4407a4a21",
             "user": "614f92d8fb18c00c860cccfc",
-            "title": "Daily Routine to be followed",
-            "description": "Read Medium Articles",
-            "tag": "learning",
+            "title": title,
+            "description": description,
+            "tag": tag,
             "date": "2021-10-01T19:48:47.761Z",
             "__v": 0
         }
