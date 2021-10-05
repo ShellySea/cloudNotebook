@@ -33,17 +33,8 @@ const NoteState = (props) => {
                 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE0ZjkyZDhmYjE4YzAwYzg2MGNjY2ZjIn0sImlhdCI6MTYzMjY3OTk0M30.nVo04LwFQLOcDB8hmTV1Wfp5oEQ5npY9mgM6ByB1ShA'
             },
             body: JSON.stringify({ title, description, tag })
-        }).then(resp => console.log(resp)).catch(err => console.log(`Err is ${err}`))
-        // const json = response.json();
-        const note = {
-            "_id": "6150ce9f44cfb6c4407a4a21",
-            "user": "614f92d8fb18c00c860cccfc",
-            "title": title,
-            "description": description,
-            "tag": tag,
-            "date": "2021-10-01T19:48:47.761Z",
-            "__v": 0
-        }
+        });
+        const note = await response.json();
         setNotes(notes.concat(note));
     }
 

@@ -4,12 +4,11 @@ import noteContext from '../context/notes/noteContext'
 const Noteitem = (props) => {
     let context = useContext(noteContext);
 
-    const { deleteNote, editNote } = context;
+    const { deleteNote } = context;
 
     const { id, title, description, updateNote } = props;
 
     const handleEdit = (p) => {
-        // editNote(p);
         updateNote(p);
     }
 
