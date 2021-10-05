@@ -6,10 +6,11 @@ const Noteitem = (props) => {
 
     const { deleteNote, editNote } = context;
 
-    const { id, title, description } = props;
+    const { id, title, description, updateNote } = props;
 
     const handleEdit = (p) => {
-        editNote(p);
+        // editNote(p);
+        updateNote(p);
     }
 
     const handleDelete = (e) => {

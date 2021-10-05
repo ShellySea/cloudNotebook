@@ -49,6 +49,17 @@ const NoteState = (props) => {
 
     // Delete a Note
     const deleteNote = async (id) => {
+        console.log('Fetching notes');
+        const url = `${host}/api/notes/deletenote/${id}`;
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE0ZjkyZDhmYjE4YzAwYzg2MGNjY2ZjIn0sImlhdCI6MTYzMjY3OTk0M30.nVo04LwFQLOcDB8hmTV1Wfp5oEQ5npY9mgM6ByB1ShA'
+            }
+        });
+        const json = await response.json();
+        console.log(json);
         let filtered = notes.filter((item) => {
             return item._id !== id;
         })
@@ -57,27 +68,26 @@ const NoteState = (props) => {
 
     // Edit a Note
     const editNote = async (data) => {
-        let title = data.title;
-        let description = data.description;
-        let tag = data.tag;
-        const response = await fetch(`${host}/api/notes/updatenote/${data.id}`, {
-            method: 'POST',
+        let title = data.etitle;
+        let description = data.edescription;
+        let tag = data.etag;
+        const response = await fetch(`${host}/api/notes/updatenote/${data.eid}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE0ZjkyZDhmYjE4YzAwYzg2MGNjY2ZjIn0sImlhdCI6MTYzMjY3OTk0M30.nVo04LwFQLOcDB8hmTV1Wfp5oEQ5npY9mgM6ByB1ShA'
             },
             body: JSON.stringify({ title, description, tag })
-        }).then(resp => console.log(resp)).catch(err => console.log(err))
-        const json = response.json();
+        });
+        const json = await response.json();
 
         for (let index = 0; index < notes.length; index++) {
             const element = notes[index];
-            if (element._id === data.id) {
+            if (element._id === data.eid) {
                 element.title = title;
                 element.description = description;
                 element.tag = tag;
             }
-
         }
     }
 
