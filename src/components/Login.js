@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 
-function Login() {
+function Login(props) {
     const history = useHistory();
 
     const handleSubmit = async (e) => {
@@ -19,8 +19,10 @@ function Login() {
             // navigate to Home
             localStorage.setItem('token', json.authtoken)
             history.push("/");
+            props.showAlert('Logged In successfully', 'success');
         } else {
             // error: donot allow to navigate
+            props.showAlert(json.error, 'danger');
         }
     }
 

@@ -3,7 +3,7 @@ import noteContext from '../context/notes/noteContext';
 import Noteitem from './Noteitem';
 import Addnote from './Addnote';
 
-export const Notes = () => {
+export const Notes = (props) => {
     const context = useContext(noteContext);
     const { notes, fetchAllNotes, editNote } = context;
 
@@ -22,22 +22,19 @@ export const Notes = () => {
     const onUpdate = (n) => {
         editNote(n);
         close.current.click();
+        props.showAlert('Note updated successfully', 'success');
     }
 
     const close = useRef(null);
 
     const ref = useRef(null);
 
-    const handleClick = (e) => {
-        e.preventDefault();
-    }
-
     const handleFields = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
     }
     return (
         <>
-            <Addnote />
+            <Addnote showAlert={props.showAlert} />
             <button type="button" className="btn btn-primary d-none" ref={ref} data-bs-toggle="modal" data-bs-target="#myModal">
                 Launch demo modal
             </button>
@@ -80,7 +77,7 @@ export const Notes = () => {
                 {notes.length === 0 && <h6 className="text-center">No Notes Available!</h6>}
                 {notes.map((note) => {
                     return <Noteitem key={note._id} updateNote={updateNote} title={note.title} id={note._id}
-                        description={note.description} tag={note.tag} />
+                        description={note.description} tag={note.tag} showAlert={props.showAlert} />
                 })}
             </div>
         </>

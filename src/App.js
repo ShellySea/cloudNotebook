@@ -7,24 +7,34 @@ import Signup from './components/Signup';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NoteState from './context/notes/NoteState';
 import Alert from './components/Alert';
+import { useState } from 'react';
 
 function App() {
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type) => {
+    setAlert({ msg: message, type: type });
+    setTimeout(() => {
+      setAlert(null);
+    }, 2000);
+  }
+
   return (
     <div className="App">
       <NoteState>
         <Router>
           <Navbar appName='iNoteBook' />
-          <Alert message={'Hi i am Alert'} />
+          <Alert alert={alert} />
           <div className="container">
             <Switch>
               <Route exact path="/login">
-                <Login />
+                <Login showAlert={showAlert} />
               </Route>
               <Route exact path="/signup">
-                <Signup />
+                <Signup showAlert={showAlert} />
               </Route>
               <Route exact path="/">
-                <Home />
+                <Home showAlert={showAlert} />
               </Route>
               <Route exact path="/about">
                 <About />

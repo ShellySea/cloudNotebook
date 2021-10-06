@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-function Signup() {
+function Signup(props) {
 
     const history = useHistory();
     const [signupData, setSignupData] = useState({ name: '', email: '', password: '', cpassword: '' });
@@ -20,10 +20,12 @@ function Signup() {
         console.log(json);
         if (json.success) {
             // navigate to Home
-            localStorage.setItem('token', json.authtoken)
+            localStorage.setItem('token', json.authtoken);
             history.push("/");
+            props.showAlert('Account created successfully', 'success');
         } else {
             // error: donot allow to navigate
+            props.showAlert('Invalid details', 'danger')
         }
     }
 
