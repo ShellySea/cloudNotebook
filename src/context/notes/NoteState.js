@@ -5,7 +5,7 @@ const NoteState = (props) => {
     let host = "http://localhost:5000";
     const notesInitial = [];
     const [notes, setNotes] = useState(notesInitial);
-
+    let token = localStorage.getItem('token');
     //Fetch All Notes
     const fetchAllNotes = async () => {
         console.log('Fetching notes');
@@ -14,7 +14,7 @@ const NoteState = (props) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE0ZjkyZDhmYjE4YzAwYzg2MGNjY2ZjIn0sImlhdCI6MTYzMjY3OTk0M30.nVo04LwFQLOcDB8hmTV1Wfp5oEQ5npY9mgM6ByB1ShA'
+                'auth-token': token
             }
         });
         const json = await response.json();
