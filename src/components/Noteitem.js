@@ -12,13 +12,13 @@ const Noteitem = (props) => {
         updateNote(p);
     }
 
-    const handleDelete = (id) => {
-        deleteNote(id);
+    const handleDelete = (e) => {
+        deleteNote(e.target.dataset.id);
     }
 
-    // const handleDelete1 = (id) => {
-    //     console.log(id)
-    // }
+    const handleDelete1 = (id) => {
+        console.log(id)
+    }
 
     return (
         <div className="col-md-3">
@@ -27,8 +27,8 @@ const Noteitem = (props) => {
                     <h5 className="card-title">{title}</h5>
                     <p className="card-text">{description}</p>
                     <i className="fas fa-edit mx-2" onClick={() => { handleEdit(props) }}></i>
-                    <i className="fas fa-trash-alt mx-2" data-id={id} onClick={() => { handleDelete(id); props.showAlert('Deleted successfully', 'success'); }}></i>
-                    {/* <i className="fas fa-trash-alt mx-2" onClick={() => { handleDelete1(id) }}></i> */}
+                    <i className="fas fa-trash-alt mx-2 d-none" data-id={id} onClick={handleDelete}></i>
+                    <i className="fas fa-trash-alt mx-2" onClick={() => { handleDelete1(id); props.showAlert('Deleted successfully', 'success'); }}></i>
                 </div>
             </div>
         </div >
