@@ -117,4 +117,5 @@ module.exports = router
   "email":"sailyj@mail.com",
     "password":"mypass!@#"
 }
+skythakur@gmail.com,sky123
  */
