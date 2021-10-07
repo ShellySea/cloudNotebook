@@ -17,7 +17,7 @@ const Noteitem = (props) => {
     }
 
     const handleDelete1 = (id) => {
-        console.log(id)
+        deleteNote(id);
     }
 
     return (

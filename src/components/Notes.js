@@ -2,15 +2,21 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import noteContext from '../context/notes/noteContext';
 import Noteitem from './Noteitem';
 import Addnote from './Addnote';
+import { useHistory } from 'react-router';
 
 export const Notes = (props) => {
+
     const context = useContext(noteContext);
     const { notes, fetchAllNotes, editNote } = context;
-
+    let history = useHistory();
     const [note, setNote] = useState({ etitle: "", edescription: "", etag: "default", eid: "" })
 
     useEffect(() => {
-        fetchAllNotes();
+        if (localStorage.getItem('token')) {
+            fetchAllNotes();
+        } else {
+            history.push('/login');
+        }
         // eslint-disable-next-line
     }, [])
 
@@ -32,6 +38,7 @@ export const Notes = (props) => {
     const handleFields = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
     }
+
     return (
         <>
             <Addnote showAlert={props.showAlert} />
@@ -75,7 +82,7 @@ export const Notes = (props) => {
             <div className="row my-3">
                 <h1>Your Notes</h1>
                 {notes.length === 0 && <h6 className="text-center">No Notes Available!</h6>}
-                {notes.map((note) => {
+                {notes.length > 0 && notes.map((note) => {
                     return <Noteitem key={note._id} updateNote={updateNote} title={note.title} id={note._id}
                         description={note.description} tag={note.tag} showAlert={props.showAlert} />
                 })}

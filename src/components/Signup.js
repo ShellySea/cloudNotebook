@@ -37,6 +37,7 @@ function Signup(props) {
         <div className="row">
             <div className="col-lg-3"></div>
             <div className="col-lg-6 my-4">
+                <h2>Create an account to use iNotebook</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">User name</label>

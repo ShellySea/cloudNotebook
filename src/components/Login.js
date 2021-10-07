@@ -30,6 +30,7 @@ function Login(props) {
         <div className="row">
             <div className="col-lg-3"></div>
             <div className="col-lg-6 my-4">
+                <h2>Login to continue to iNotebook</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email address</label>
