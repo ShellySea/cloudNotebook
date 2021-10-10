@@ -62,7 +62,7 @@ export const Notes = (props) => {
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="edescription" className="form-label">Description</label>
-                                    <input type="text" className="form-control" id="edescription" name="edescription"
+                                    <textarea type="text" className="form-control" id="edescription" name="edescription"
                                         required minLength={5} value={note.edescription} onChange={handleFields} />
                                 </div>
                                 <div className="mb-3">
